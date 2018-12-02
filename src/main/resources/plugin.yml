@@ -1,0 +1,8 @@
+name: Empires
+main: com.stefthedev.villages.Main
+version: 0.2
+author: StefTheDev
+
+commands:
+  village:
+    description: The main village command.
