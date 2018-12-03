@@ -7,5 +7,5 @@ public enum VillageFlag {
     FARM,
     IGNITE,
     INTERACT,
-    PLACE;
+    PLACE
 }

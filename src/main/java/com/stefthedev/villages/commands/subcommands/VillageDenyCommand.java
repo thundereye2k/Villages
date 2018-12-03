@@ -13,7 +13,7 @@ public class VillageDenyCommand extends SubCommand {
     private Main plugin;
 
     public VillageDenyCommand(Main plugin) {
-        super("deny", 1);
+        super("deny", "deny", 1);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }

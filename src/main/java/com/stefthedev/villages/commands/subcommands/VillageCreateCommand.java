@@ -14,7 +14,7 @@ public class VillageCreateCommand extends SubCommand {
     private Plugin plugin;
 
     public VillageCreateCommand(Main plugin) {
-        super("create", 2);
+        super("create", "create [name]", 2);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }

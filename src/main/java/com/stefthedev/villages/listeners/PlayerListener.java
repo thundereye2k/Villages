@@ -1,10 +1,8 @@
 package com.stefthedev.villages.listeners;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.utilities.Message;
-import com.stefthedev.villages.villages.Village;
+import com.stefthedev.villages.villages.VillageFlag;
 import com.stefthedev.villages.villages.VillageManager;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -22,56 +20,24 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onBucketEmpty(PlayerBucketEmptyEvent event) {
-        Village village = villageManager.isClaimed(event.getPlayer().getLocation().getChunk());
-        if (village != null) {
-            Player player = event.getPlayer();
-
-            if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) {
-                return;
-            }
-            player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()
-                    .replace("{0}", "empty buckets")
-                    .replace("{1}", village.getName())
-            );
+        if(villageManager.check(event.getPlayer().getLocation().getBlock(), event.getPlayer(), VillageFlag.BUCKET_EMPTY)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onBucketFill(PlayerBucketFillEvent event) {
-        Village village = villageManager.isClaimed(event.getPlayer().getLocation().getChunk());
-        if (village != null) {
-            Player player = event.getPlayer();
-
-            if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) {
-                return;
-            }
-
-            player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()
-                    .replace("{0}", "fill buckets")
-                    .replace("{1}", village.getName())
-            );
+        if(villageManager.check(event.getPlayer().getLocation().getBlock(), event.getPlayer(), VillageFlag.BUCKET_FILL)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
-    public void onBucketFill(PlayerInteractEvent event) {
-        Village village = villageManager.isClaimed(event.getPlayer().getLocation().getChunk());
-        if (village != null) {
-            Player player = event.getPlayer();
-
-            if (event.getAction() == Action.PHYSICAL) {
-                if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) {
-                    return;
-                }
-                player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()
-                        .replace("{0}", "interact")
-                        .replace("{1}", village.getName())
-                );
+    public void onInteract(PlayerInteractEvent event) {
+        if(villageManager.check(event.getPlayer().getLocation().getBlock(), event.getPlayer(), VillageFlag.INTERACT)) {
+            if(event.getAction() == Action.PHYSICAL) {
                 event.setCancelled(true);
             }
-
         }
     }
 }

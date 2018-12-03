@@ -4,6 +4,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public enum Message {
     PREFIX("prefix", "&e&lVillage: &7"),
+    USAGE("usage", "Usage: &b{usage}"),
     VILLAGE_CLAIM_DENY("village-claim-deny", "You are not allowed &b{0} &7as this land belongs to &b&l{1}"),
     VILLAGE_CLAIM_LIMIT("village-claim-limit", "You have reached the claim limit. You can only claim &b25&7 chunks."),
     VILLAGE_CLAIM_OTHER("village-claim-other", "This land has already been claimed by &b{0}&7."),

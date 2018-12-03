@@ -12,7 +12,7 @@ public class VillageClaimCommand extends SubCommand {
     private VillageManager villageManager;
 
     public VillageClaimCommand(Main plugin) {
-        super("claim", 1);
+        super("claim", "claim", 1);
         this.villageManager = plugin.getVillageManager();
     }
 

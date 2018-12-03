@@ -1,6 +1,6 @@
-name: Empires
+name: Villages
 main: com.stefthedev.villages.Main
-version: 0.2
+version: 0.3
 author: StefTheDev
 
 commands:

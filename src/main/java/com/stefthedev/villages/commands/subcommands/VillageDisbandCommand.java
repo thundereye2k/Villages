@@ -14,7 +14,7 @@ public class VillageDisbandCommand extends SubCommand {
     private Plugin plugin;
 
     public VillageDisbandCommand(Main plugin) {
-        super("disband", 1);
+        super("disband", "disband", 1);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }

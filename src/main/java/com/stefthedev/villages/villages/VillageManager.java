@@ -1,9 +1,11 @@
 package com.stefthedev.villages.villages;
 
 import com.stefthedev.villages.Main;
+import com.stefthedev.villages.utilities.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -119,6 +121,29 @@ public class VillageManager {
         } catch (Exception e) {
             plugin.getLogger().severe(ChatColor.RED + "An error occurred while loading: " + village.getName());
             e.printStackTrace();
+        }
+    }
+
+    public boolean check(Block block, Player player, VillageFlag villageFlag) {
+        Village village = isClaimed(block.getChunk());
+        if (village == null) {
+            return false;
+        } else {
+            if (player == null) {
+                return false;
+            }
+
+            if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) {
+                return false;
+            }
+
+            if(villageFlag == VillageFlag.INTERACT) return false;
+
+            player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()
+                    .replace("{0}", villageFlag.toString())
+                    .replace("{1}", village.getName())
+            );
+            return true;
         }
     }
 }
