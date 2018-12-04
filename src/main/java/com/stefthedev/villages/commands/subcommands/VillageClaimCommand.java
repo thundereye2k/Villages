@@ -20,7 +20,13 @@ public class VillageClaimCommand extends SubCommand {
     public void onCommand(Player player, String[] args) {
         Village village = villageManager.getVillage(player);
         if(village != null) {
-            if(village.getChunks().size() >= 25) {
+            if(player.getWorld() != villageManager.getWorld()) {
+                player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_WORLD.toString()
+                        .replace("{0}", villageManager.getWorld().getName())
+                );
+                return;
+            }
+            if(village.getChunks().size() >= villageManager.getSize()) {
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_LIMIT.toString());
                 return;
             }

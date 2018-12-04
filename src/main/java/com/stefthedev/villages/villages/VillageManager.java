@@ -5,6 +5,7 @@ import com.stefthedev.villages.utilities.Message;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,13 +19,23 @@ public class VillageManager {
     private FileConfiguration config;
 
     private final Set<Village> villageSet;
-    private final Map<UUID, Village> invite;
+    private final Map<UUID, Village> invite, disband;
+    private final List<String> help;
+
+    private final World world;
+    private final int size;
 
     public VillageManager(Main plugin) {
         this.plugin = plugin;
-        this.config = plugin.getConfig();
+        this.config = plugin.getVillages().getFileConfiguration();
+
         this.villageSet = new HashSet<>();
         this.invite = new HashMap<>();
+        this.disband = new HashMap<>();
+
+        this.help = plugin.getConfig().getStringList("Help");
+        this.world = plugin.getServer().getWorld(config.getString("World"));
+        this.size = plugin.getConfig().getInt("Claims");
     }
 
     public void deserialize() {
@@ -54,13 +65,16 @@ public class VillageManager {
     }
 
     public void serialize() {
+        ConfigurationSection configSection = config.getConfigurationSection("");
+        configSection.getKeys(false).forEach(s -> config.set(s, null));
+        plugin.getVillages().save();
         villageSet.forEach(village -> {
             config.set(village.getName() + ".level", village.getLevel());
             config.set(village.getName() + ".owner", village.getOwner().toString());
             config.set(village.getName() + ".members", getMembers(village));
             config.set(village.getName() + ".claims", getChunks(village));
         });
-        plugin.saveConfig();
+        plugin.getVillages().save();
     }
 
     public void add(Village village) {
@@ -78,10 +92,6 @@ public class VillageManager {
             }
         }
         return null;
-    }
-
-    public Map<UUID, Village> getInvite() {
-        return invite;
     }
 
     private List<UUID> getMembers(Village village) {
@@ -145,5 +155,25 @@ public class VillageManager {
             );
             return true;
         }
+    }
+
+    public Map<UUID, Village> getInvite() {
+        return invite;
+    }
+
+    public Map<UUID, Village> getDisband() {
+        return disband;
+    }
+
+    public List<String> getHelp() {
+        return help;
+    }
+
+    public World getWorld() {
+        return world;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

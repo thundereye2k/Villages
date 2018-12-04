@@ -1,0 +1,14 @@
+World: world #The world where you can claim and create villages in.
+Claims: 25 #The total amount of land a village can claim.
+
+Help:
+  - '&e&lVillages &7[ALPHA 0.4]'
+  - ''
+  - '&b/village accept | &7Accept a village invitation.'
+  - '&b/village claim | &7Claim land at your location.'
+  - '&b/village create [name] | &7Create a new village.'
+  - '&b/village deny | &7Deny an invitation to a village.'
+  - '&b/village disband | &7Disband your current village.'
+  - '&b/village invite [player] | &7Invite a player to the village.'
+  - '&b/village unclaim | &7Unclaim land from your village.'
+  - ''

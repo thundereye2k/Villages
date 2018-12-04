@@ -35,6 +35,19 @@ public class VillageAcceptCommand extends SubCommand {
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_PLAYER_JOIN.toString()
                     .replace("{0}", village.getName())
             );
+            return;
         }
+
+        village = villageManager.getDisband().get(player.getUniqueId());
+        if(village != null) {
+            plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_DISBAND_BROADCAST.toString()
+                    .replace("{0}", village.getName())
+            );
+            villageManager.remove(village);
+            villageManager.getDisband().remove(player.getUniqueId());
+            return;
+        }
+
+        player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_INVITE_NULL.toString());
     }
 }

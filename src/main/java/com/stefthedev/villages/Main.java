@@ -7,6 +7,7 @@ import com.stefthedev.villages.listeners.PlayerListener;
 import com.stefthedev.villages.utilities.Config;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.VillageManager;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,15 +17,25 @@ import java.util.Arrays;
 public class Main extends JavaPlugin {
 
     private VillageManager villageManager;
-    private Config messages;
+    private Config messages, villages;
 
     public void onEnable() {
+
         saveDefaultConfig();
 
         messages = new Config(this, "messages");
-        messages.setup();
+        villages = new Config(this, "villages");
+
+        registerConfigs(messages, villages);
 
         villageManager = new VillageManager(this);
+
+        if(!getServer().getWorlds().contains(villageManager.getWorld())) {
+            getLogger().warning(ChatColor.YELLOW + "The world does not exist that is configured in your config.yml");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+
         villageManager.deserialize();
 
         registerMessages(messages.getFileConfiguration());
@@ -43,6 +54,10 @@ public class Main extends JavaPlugin {
         Arrays.asList(commands).forEach(command -> getCommand(command.getName()).setExecutor(command));
     }
 
+    private void registerConfigs(Config... configs) {
+        Arrays.asList(configs).forEach(Config::setup);
+    }
+
     private void registerListeners(Listener... listeners) {
         Arrays.asList(listeners).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
@@ -58,7 +73,13 @@ public class Main extends JavaPlugin {
     }
 
     public void onDisable() {
+        villageManager.getInvite().clear();
+        villageManager.getDisband().clear();
         villageManager.serialize();
+    }
+
+    public Config getVillages() {
+        return villages;
     }
 
     public VillageManager getVillageManager() {

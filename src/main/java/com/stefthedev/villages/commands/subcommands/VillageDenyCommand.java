@@ -32,6 +32,18 @@ public class VillageDenyCommand extends SubCommand {
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_DENY_PLAYER.toString()
                     .replace("{0}", village.getName())
             );
+            return;
         }
+
+        village = villageManager.getDisband().get(player.getUniqueId());
+        if(village != null) {
+            plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_DISBAND_DENY.toString()
+                    .replace("{0}", village.getName())
+            );
+            villageManager.getDisband().remove(player.getUniqueId());
+            return;
+        }
+
+        player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_INVITE_NULL.toString());
     }
 }

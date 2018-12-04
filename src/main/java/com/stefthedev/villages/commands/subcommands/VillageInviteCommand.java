@@ -2,12 +2,14 @@ package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
+import com.stefthedev.villages.utilities.Chat;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
 import com.stefthedev.villages.villages.VillageManager;
 import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class VillageInviteCommand extends SubCommand {
@@ -54,10 +56,12 @@ public class VillageInviteCommand extends SubCommand {
                             .replace("{1}", village.getName())
                     );
 
-                    TextComponent accept = new TextComponent(ChatColor.GREEN + "[Accept]" + " ");
+                    TextComponent accept = new TextComponent(Chat.color(Message.ACCEPT.toString()) + " ");
+                    accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Chat.color(Message.TOOLTIP.toString())).create()));
                     accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/village accept"));
 
-                    TextComponent deny = new TextComponent(ChatColor.RED + "[Deny]");
+                    TextComponent deny = new TextComponent(Chat.color(Message.DENY.toString()) + " ");
+                    deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(Chat.color(Message.TOOLTIP.toString())).create()));
                     deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/village deny"));
 
                     target.spigot().sendMessage(accept, deny);

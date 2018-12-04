@@ -3,12 +3,11 @@ package com.stefthedev.villages.listeners;
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.villages.VillageFlag;
 import com.stefthedev.villages.villages.VillageManager;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.player.PlayerBucketEmptyEvent;
-import org.bukkit.event.player.PlayerBucketFillEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.*;
 
 public class PlayerListener implements Listener {
 
@@ -39,5 +38,19 @@ public class PlayerListener implements Listener {
                 event.setCancelled(true);
             }
         }
+    }
+
+    @EventHandler
+    public void onJoin(PlayerJoinEvent event) {
+        //This is just to be safe.
+        villageManager.getDisband().remove(event.getPlayer().getUniqueId());
+        villageManager.getInvite().remove(event.getPlayer().getUniqueId());
+    }
+
+    @EventHandler
+    public void onQuit(PlayerQuitEvent event) {
+        //This is just to be safe.
+        villageManager.getDisband().remove(event.getPlayer().getUniqueId());
+        villageManager.getInvite().remove(event.getPlayer().getUniqueId());
     }
 }

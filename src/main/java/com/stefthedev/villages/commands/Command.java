@@ -23,7 +23,7 @@ public abstract class Command implements CommandExecutor {
         if (strings.length > 0) {
             Arrays.asList(subCommands).forEach(subCommand -> {
                 if (!commandSender.hasPermission((permission + "." + subCommand.getName()).toLowerCase())) {
-                    commandSender.sendMessage("You do not have permissions for this command.");
+                    commandSender.sendMessage(Message.PREFIX.toString() + Message.PERMISSION.toString());
                     return;
                 }
                 if (subCommand.getName().equalsIgnoreCase(strings[0])) {

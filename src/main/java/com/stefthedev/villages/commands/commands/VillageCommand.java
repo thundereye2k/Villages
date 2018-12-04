@@ -4,11 +4,13 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.Command;
 import com.stefthedev.villages.commands.subcommands.*;
 import com.stefthedev.villages.utilities.Chat;
-import com.stefthedev.villages.utilities.Message;
+import com.stefthedev.villages.villages.VillageManager;
 import org.bukkit.entity.Player;
 
 
 public class VillageCommand extends Command {
+
+    private VillageManager villageManager;
 
     public VillageCommand(Main plugin) {
         super("village", "village",
@@ -20,10 +22,11 @@ public class VillageCommand extends Command {
                 new VillageInviteCommand(plugin),
                 new VillageUnClaimCommand(plugin)
         );
+        this.villageManager = plugin.getVillageManager();
     }
 
     @Override
     public void onCommand(Player player, String[] args) {
-        player.sendMessage(Message.PREFIX.toString() + Chat.color("This version is still in alpha use&b /village create [name] &7to get started."));
+        villageManager.getHelp().forEach(s -> player.sendMessage(Chat.color(s)));
     }
 }

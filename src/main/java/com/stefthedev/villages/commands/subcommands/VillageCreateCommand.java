@@ -24,6 +24,7 @@ public class VillageCreateCommand extends SubCommand {
         Village village = villageManager.getVillage(player);
         if(village == null) {
             village = new Village(args[1], player.getUniqueId(), 0);
+            village.getChunks().add(player.getLocation().getChunk());
             villageManager.add(village);
             plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_CREATE_ALL.toString()
                     .replace("{0}", player.getName())
