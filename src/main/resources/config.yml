@@ -1,14 +1,27 @@
 World: world #The world where you can claim and create villages in.
 Claims: 25 #The total amount of land a village can claim.
 
+#You are able to add as many help pages as you desire.
 Help:
-  - '&e&lVillages &7[ALPHA 0.4]'
-  - ''
-  - '&b/village accept | &7Accept a village invitation.'
-  - '&b/village claim | &7Claim land at your location.'
-  - '&b/village create [name] | &7Create a new village.'
-  - '&b/village deny | &7Deny an invitation to a village.'
-  - '&b/village disband | &7Disband your current village.'
-  - '&b/village invite [player] | &7Invite a player to the village.'
-  - '&b/village unclaim | &7Unclaim land from your village.'
-  - ''
+  1:
+    - '&e&lVillage &7[Page 1/2]'
+    - ''
+    - ' &b/village accept | &7Accept a village invitation.'
+    - ' &b/village claim | &7Claim land at your location.'
+    - ' &b/village create [name] | &7Create a new village.'
+    - ' &b/village deny | &7Deny an invitation to a village.'
+    - ' &b/village disband | &7Disband your current village.'
+    - ' &b/village home| &7Teleport to your village home.'
+    - ''
+    - '&7Type &b/village 2 &7for the next page.'
+  2:
+    - '&e&lVillage &7[Page 1/2]'
+    - ''
+    - ' &b/village invite [player] | &7Invite a player to the village.'
+    - ' &b/village reload | &7Reload the village configuration.'
+    - ' &b/village sethome | &7Set the home of your village.'
+    - ' &b/village unclaim | &7Unclaim land from your village.'
+    - ''
+    - ''
+    - '&7If you need any further help, feel free to'
+    - '&7contact a staff member for support.'

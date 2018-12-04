@@ -14,7 +14,7 @@ public class VillageCreateCommand extends SubCommand {
     private Plugin plugin;
 
     public VillageCreateCommand(Main plugin) {
-        super("create", "create [name]", 2);
+        super("create", "create [name]", "Create a new village.", 2);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }
@@ -23,7 +23,7 @@ public class VillageCreateCommand extends SubCommand {
     public void onCommand(Player player, String[] args) {
         Village village = villageManager.getVillage(player);
         if(village == null) {
-            village = new Village(args[1], player.getUniqueId(), 0);
+            village = new Village(args[1], player.getUniqueId(), 0, player.getLocation());
             village.getChunks().add(player.getLocation().getChunk());
             villageManager.add(village);
             plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_CREATE_ALL.toString()

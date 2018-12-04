@@ -2,10 +2,7 @@ package com.stefthedev.villages.villages;
 
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.utilities.Message;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Chunk;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -51,8 +48,8 @@ public class VillageManager {
                 configSection.getKeys(false).forEach(s -> {
                     Village village = new Village(s,
                             UUID.fromString(config.getString(s + ".owner")),
-                            config.getInt(s + ".level")
-                    );
+                            config.getInt(s + ".level"),
+                            (Location) config.get(s + ".location"));
                     setup(village, config.getStringList(s + ".claims"), config.getStringList(s + ".members"));
 
                     villageSet.add(village);
@@ -75,7 +72,9 @@ public class VillageManager {
             config.set(village.getName() + ".owner", village.getOwner().toString());
             config.set(village.getName() + ".members", getMembers(village));
             config.set(village.getName() + ".claims", getChunks(village));
+            config.set(village.getName() + ".location", village.getLocation());
         });
+        villageSet.clear();
         plugin.getVillages().save();
     }
 

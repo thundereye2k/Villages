@@ -18,7 +18,7 @@ public class VillageInviteCommand extends SubCommand {
     private Main plugin;
 
     public VillageInviteCommand(Main plugin) {
-        super("invite", "invite [player]", 2);
+        super("invite", "invite [player]", "Invite a player to your village.", 2);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }

@@ -4,12 +4,13 @@ import org.bukkit.entity.Player;
 
 public abstract class SubCommand {
 
-    private String name, usage;
+    private String name, usage, description;
     private int length;
 
-    public SubCommand(String name, String usage, int length) {
+    public SubCommand(String name, String usage, String description, int length) {
         this.name = name;
         this.usage = usage;
+        this.description = description;
         this.length = length;
     }
 
@@ -23,7 +24,12 @@ public abstract class SubCommand {
         return usage;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     int getLength() {
         return length;
     }
+
 }

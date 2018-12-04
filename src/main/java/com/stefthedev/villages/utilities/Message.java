@@ -29,18 +29,28 @@ public enum Message {
     VILLAGE_INVITE_OWNER("village-invite-owner", "You cannot invite yourself to the village"),
     VILLAGE_INVITE_SELF("village-invite-self", "You have invited &b{0} &7to join your village."),
     VILLAGE_INVITE_TRUE("village-invite-true", "&b{0}&7 has already been invited to join a village"),
+    VILLAGE_LOCATION("village-location", "You have been teleported to your village home."),
+    VILLAGE_LOCATION_FALSE("village-location-true", "Your village does not have a home."),
+    VILLAGE_LOCATION_OWNER("village-location-owner", "You must be owner of the village to set a home."),
+    VILLAGE_LOCATION_OTHER("village-location-other", "You are not able to set your home on other village land."),
+    VILLAGE_LOCATION_SET("village-location-set", "You have set a new home at your location."),
+    VILLAGE_LOCATION_WILDERNESS("village-location-wilderness", "You are not able to set home in the wilderness."),
     VILLAGE_RELOAD("village-reload", "You have successfully reloaded the configuration."),
     VILLAGE_RELOAD_ERROR("village-reload-error", "An error occurred while reloading the configuration."),
     VILLAGE_PLAYER_JOIN("village-player-join", "You have successfully joined &b{0}&7."),
     VILLAGE_PLAYER_TRUE("village-player-true", "You already belong to a village."),
     VILLAGE_PLAYER_FALSE("village-player-false", "You do not belong to a village."),
     VILLAGE_PLAYER_OFFLINE("village-player-offline", "The player &b{0} &7does not seem to be online."),
+    VILLAGE_TARGET_JOIN("village-target-join", "&b{0} &7has joined your village."),
+    VILLAGE_TARGET_TRUE("village-target-true", "&b{0} &7already belongs to a village."),
+    VILLAGE_TITLE_HEADER("village-title-header", "&e&l{0}"),
+    VILLAGE_TITLE_FOOTER("village-title-footer", "&7A peaceful settlement."),
+    VILLAGE_TITLE_HEADER_WILDERNESS("village-title-header-wilderness", "&a&l{0}"),
+    VILLAGE_TITLE_FOOTER_WILDERNESS("village-title-footer-wilderness", "&7Fresh new land awaits you."),
     VILLAGE_UNCLAIM("village-unclaim", "You have unclaimed an area for your village."),
     VILLAGE_UNCLAIM_FALSE("village-unclaim-false", "This land has not yet been claimed."),
     VILLAGE_UNCLAIM_OTHER("village-unclaim-other", "You can't unclaim this land because it belongs to &b{0}&7."),
-    VILLAGE_UNCLAIM_OWNER("village-unclaim-owner", "You must be owner to unclaim your village land."),
-    VILLAGE_TARGET_JOIN("village-target-join", "&b{0} &7has joined your village."),
-    VILLAGE_TARGET_TRUE("village-invite-true", "&b{0} &7already belongs to a village."),;
+    VILLAGE_UNCLAIM_OWNER("village-unclaim-owner", "You must be owner to unclaim your village land.");
 
     private String path, def;
     private static FileConfiguration configuration;

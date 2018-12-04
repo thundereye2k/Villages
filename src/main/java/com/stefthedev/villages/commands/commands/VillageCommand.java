@@ -4,13 +4,11 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.Command;
 import com.stefthedev.villages.commands.subcommands.*;
 import com.stefthedev.villages.utilities.Chat;
-import com.stefthedev.villages.villages.VillageManager;
 import org.bukkit.entity.Player;
-
 
 public class VillageCommand extends Command {
 
-    private VillageManager villageManager;
+    private Main plugin;
 
     public VillageCommand(Main plugin) {
         super("village", "village",
@@ -19,15 +17,28 @@ public class VillageCommand extends Command {
                 new VillageCreateCommand(plugin),
                 new VillageDenyCommand(plugin),
                 new VillageDisbandCommand(plugin),
+                new VillageHomeCommand(plugin),
                 new VillageInviteCommand(plugin),
                 new VillageReloadCommand(plugin),
+                new VillageSetHomeCommand(plugin),
                 new VillageUnClaimCommand(plugin)
         );
-        this.villageManager = plugin.getVillageManager();
+        this.plugin = plugin;
     }
 
     @Override
     public void onCommand(Player player, String[] args) {
-        villageManager.getHelp().forEach(s -> player.sendMessage(Chat.color(s)));
+        int index = 1;
+        if(args.length == 1) {
+            if (args[0].matches("[0-9]+")) {
+                index = Integer.parseInt(args[0]);
+            }
+        }
+
+        if(index > plugin.getConfig().getConfigurationSection("Help").getKeys(false).size()) {
+            index = 1;
+        }
+
+        plugin.getConfig().getStringList("Help." + index).forEach(s -> player.sendMessage(Chat.color(s)));
     }
 }

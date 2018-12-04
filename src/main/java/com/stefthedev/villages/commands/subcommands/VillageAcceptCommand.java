@@ -13,7 +13,7 @@ public class VillageAcceptCommand extends SubCommand {
     private Main plugin;
 
     public VillageAcceptCommand(Main plugin) {
-        super("accept", "accept", 1);
+        super("accept", "accept", "Accept a pending request.", 1);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }

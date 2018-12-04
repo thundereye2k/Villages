@@ -12,7 +12,7 @@ public class VillageUnClaimCommand extends SubCommand {
     private VillageManager villageManager;
 
     public VillageUnClaimCommand(Main plugin) {
-        super("unclaim", "unclaim", 1);
+        super("unclaim", "unclaim", "Unclaim land from your village.", 1);
         this.villageManager = plugin.getVillageManager();
     }
 

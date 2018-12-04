@@ -10,7 +10,7 @@ public class VillageReloadCommand extends SubCommand {
     private Main plugin;
 
     public VillageReloadCommand(Main plugin) {
-        super("reload", "reload", 1);
+        super("reload", "reload", "Reload the village configuration.", 1);
         this.plugin = plugin;
     }
 
