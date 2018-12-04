@@ -29,6 +29,8 @@ public enum Message {
     VILLAGE_INVITE_OWNER("village-invite-owner", "You cannot invite yourself to the village"),
     VILLAGE_INVITE_SELF("village-invite-self", "You have invited &b{0} &7to join your village."),
     VILLAGE_INVITE_TRUE("village-invite-true", "&b{0}&7 has already been invited to join a village"),
+    VILLAGE_RELOAD("village-reload", "You have successfully reloaded the configuration."),
+    VILLAGE_RELOAD_ERROR("village-reload-error", "An error occurred while reloading the configuration."),
     VILLAGE_PLAYER_JOIN("village-player-join", "You have successfully joined &b{0}&7."),
     VILLAGE_PLAYER_TRUE("village-player-true", "You already belong to a village."),
     VILLAGE_PLAYER_FALSE("village-player-false", "You do not belong to a village."),

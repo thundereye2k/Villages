@@ -29,6 +29,7 @@ public class Main extends JavaPlugin {
         registerConfigs(messages, villages);
 
         villageManager = new VillageManager(this);
+        villageManager.setup();
 
         if(!getServer().getWorlds().contains(villageManager.getWorld())) {
             getLogger().warning(ChatColor.YELLOW + "The world does not exist that is configured in your config.yml");
@@ -62,7 +63,7 @@ public class Main extends JavaPlugin {
         Arrays.asList(listeners).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
 
-    private void registerMessages(FileConfiguration configuration) {
+    public void registerMessages(FileConfiguration configuration) {
         Message.setConfiguration(configuration);
         for(Message message: Message.values()) {
             if (configuration.getString(message.getPath()) == null) {
@@ -76,6 +77,10 @@ public class Main extends JavaPlugin {
         villageManager.getInvite().clear();
         villageManager.getDisband().clear();
         villageManager.serialize();
+    }
+
+    public Config getMessages() {
+        return messages;
     }
 
     public Config getVillages() {

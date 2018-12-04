@@ -20,6 +20,7 @@ public class VillageCommand extends Command {
                 new VillageDenyCommand(plugin),
                 new VillageDisbandCommand(plugin),
                 new VillageInviteCommand(plugin),
+                new VillageReloadCommand(plugin),
                 new VillageUnClaimCommand(plugin)
         );
         this.villageManager = plugin.getVillageManager();

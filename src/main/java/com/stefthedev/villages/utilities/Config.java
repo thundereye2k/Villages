@@ -37,7 +37,7 @@ public class Config {
         save();
     }
 
-    private void reload(){
+    public void reload(){
         fileConfiguration = YamlConfiguration.loadConfiguration(file);
         InputStream inputStream = javaPlugin.getResource(name + ".yml");
         if(inputStream != null) fileConfiguration.setDefaults(YamlConfiguration.loadConfiguration(new InputStreamReader(inputStream)));

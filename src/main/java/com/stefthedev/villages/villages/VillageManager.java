@@ -20,10 +20,10 @@ public class VillageManager {
 
     private final Set<Village> villageSet;
     private final Map<UUID, Village> invite, disband;
-    private final List<String> help;
 
-    private final World world;
-    private final int size;
+    private List<String> help;
+    private World world;
+    private int size;
 
     public VillageManager(Main plugin) {
         this.plugin = plugin;
@@ -32,9 +32,11 @@ public class VillageManager {
         this.villageSet = new HashSet<>();
         this.invite = new HashMap<>();
         this.disband = new HashMap<>();
+    }
 
+    public void setup() {
         this.help = plugin.getConfig().getStringList("Help");
-        this.world = plugin.getServer().getWorld(config.getString("World"));
+        this.world = plugin.getServer().getWorld(plugin.getConfig().getString("World"));
         this.size = plugin.getConfig().getInt("Claims");
     }
 
