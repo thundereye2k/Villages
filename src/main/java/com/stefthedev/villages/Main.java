@@ -2,13 +2,13 @@ package com.stefthedev.villages;
 
 import com.stefthedev.villages.commands.Command;
 import com.stefthedev.villages.commands.commands.VillageCommand;
+import com.stefthedev.villages.hooks.WorldGuardHook;
 import com.stefthedev.villages.managers.ConfigManager;
 import com.stefthedev.villages.managers.HookManager;
 import com.stefthedev.villages.managers.VillageManager;
 import com.stefthedev.villages.listeners.BlockListener;
 import com.stefthedev.villages.listeners.PlayerListener;
 import com.stefthedev.villages.utilities.Config;
-import com.stefthedev.villages.utilities.Hook;
 import com.stefthedev.villages.utilities.Manager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,7 +26,7 @@ public class Main extends JavaPlugin {
         saveDefaultConfig();
 
         hookManager = new HookManager(this,
-                new Hook("WorldGuard")
+                new WorldGuardHook()
         );
 
         configManager = new ConfigManager(

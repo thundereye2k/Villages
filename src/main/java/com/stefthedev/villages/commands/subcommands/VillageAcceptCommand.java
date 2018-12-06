@@ -22,6 +22,8 @@ public class VillageAcceptCommand extends SubCommand {
     public void onCommand(Player player, String[] args) {
         Village village = villageManager.getInvite().get(player.getUniqueId());
         if(village != null) {
+            villageManager.getInvite().remove(player.getUniqueId());
+
             village.getMembers().forEach(uuid -> {
                 Player member = plugin.getServer().getPlayer(uuid);
                 if(member != null) {
@@ -31,7 +33,6 @@ public class VillageAcceptCommand extends SubCommand {
                 }
             });
             village.getMembers().add(player.getUniqueId());
-            villageManager.getInvite().remove(player.getUniqueId());
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_PLAYER_JOIN.toString()
                     .replace("{0}", village.toString())
             );

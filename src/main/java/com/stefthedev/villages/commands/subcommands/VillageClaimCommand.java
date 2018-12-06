@@ -1,17 +1,22 @@
 package com.stefthedev.villages.commands.subcommands;
 
+import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
+import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
+import com.stefthedev.villages.hooks.WorldGuardHook;
 import com.stefthedev.villages.managers.HookManager;
 import com.stefthedev.villages.managers.VillageManager;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
 import org.bukkit.entity.Player;
+
 
 public class VillageClaimCommand extends SubCommand {
 
@@ -26,19 +31,11 @@ public class VillageClaimCommand extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        if(hookManager.getObject("WorldGuard").isEnabled()) {
-            WorldGuardPlatform worldGuard = WorldGuard.getInstance().getPlatform();
-            RegionContainer regionContainer = worldGuard.getRegionContainer();
-            World world = worldGuard.getWorldByName(player.getWorld().getName());
-            RegionManager regionManager = regionContainer.get(world);
-            if(regionManager != null) {
-                System.out.println("Works");
-                regionManager.getRegions().forEach((s, protectedRegion) -> {
-                    if (protectedRegion.getMembers().getPlayers().contains(player.getName())) {
-                        player.sendMessage("Works.");
-                    }
-                });
-            }
+        WorldGuardHook worldGuardHook = (WorldGuardHook) hookManager.getObject("WorldGuard");
+
+        if(worldGuardHook.isEnabled() && worldGuardHook.conflict(player)) {
+            player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_CONFLICT.toString());
+            return;
         }
 
         Village village = villageManager.getVillage(player);

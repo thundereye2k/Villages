@@ -79,7 +79,7 @@ public class VillageManager extends Manager<Village> {
         getSet().forEach(village -> {
             configuration.set(village.toString() + ".level", village.getLevel());
             configuration.set(village.toString() + ".owner", village.getOwner().toString());
-            configuration.set(village.toString() + ".members", village.getMembers().toArray());
+            configuration.set(village.toString() + ".members", getMembers(village));
             configuration.set(village.toString() + ".claims", getClaims(village));
             configuration.set(village.toString() + ".location", village.getLocation());
         });
@@ -114,6 +114,14 @@ public class VillageManager extends Manager<Village> {
             claims.add(villageClaim.toString());
         }
         return claims;
+    }
+
+    private List<String> getMembers(Village village) {
+        List<String> members = new ArrayList<>();
+        for (UUID uuid : village.getMembers()) {
+            members.add(uuid.toString());
+        }
+        return members;
     }
 
     public boolean allowClaim(Player player) {

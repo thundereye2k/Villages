@@ -28,12 +28,15 @@ public class VillageLeaveCommand extends SubCommand {
         }
 
         if(village.getMembers().contains(player.getUniqueId())) {
+            villageManager.getInvite().remove(player.getUniqueId());
             village.getMembers().forEach(uuid -> {
                 Player member = plugin.getServer().getPlayer(uuid);
                 if(member != null) {
-                    member.sendMessage(Message.PREFIX.toString() + "".replace("{0}", player.getName()));
+                    member.sendMessage(Message.PREFIX.toString() +  Message.VILLAGE_LEAVE_MEMBERS.toString().replace("{0}", player.getName()));
                 }
             });
+            village.getMembers().remove(player.getUniqueId());
+            player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_LEAVE.toString());
         } else {
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_PLAYER_FALSE.toString());
         }

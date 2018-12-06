@@ -36,7 +36,7 @@ public class VillageInviteCommand extends SubCommand {
                 );
             } else {
                 if(village.getMembers().contains(target.getUniqueId())) {
-                    player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_INVITE_TRUE.toString()
+                    player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_TARGET_MEMBER.toString()
                             .replace("{0}", target.getName())
                     );
                     return;
@@ -73,7 +73,6 @@ public class VillageInviteCommand extends SubCommand {
                     deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/village deny"));
 
                     target.spigot().sendMessage(accept, deny);
-
                     villageManager.getInvite().put(target.getUniqueId(), village);
                 } else {
                     player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_INVITE_TRUE.toString()
