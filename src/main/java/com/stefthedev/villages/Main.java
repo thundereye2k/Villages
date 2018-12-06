@@ -8,6 +8,7 @@ import com.stefthedev.villages.managers.VillageManager;
 import com.stefthedev.villages.listeners.BlockListener;
 import com.stefthedev.villages.listeners.PlayerListener;
 import com.stefthedev.villages.utilities.Config;
+import com.stefthedev.villages.utilities.Hook;
 import com.stefthedev.villages.utilities.Manager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -24,7 +25,9 @@ public class Main extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
-        hookManager = new HookManager(this);
+        hookManager = new HookManager(this,
+                new Hook("WorldGuard")
+        );
 
         configManager = new ConfigManager(
                 new Config(this, "messages"),

@@ -30,7 +30,6 @@ public abstract class Manager<T> {
 
     public T getObject(String name) {
         for(T t : ts) {
-            System.out.println(t);
             if(t.toString().equalsIgnoreCase(name)) {
                 return t;
             }
