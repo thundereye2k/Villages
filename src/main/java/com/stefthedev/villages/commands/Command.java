@@ -47,10 +47,6 @@ public abstract class Command implements CommandExecutor {
         return true;
     }
 
-    public SubCommand[] getSubCommands() {
-        return subCommands;
-    }
-
     public abstract void onCommand(Player player, String[] args);
 
     public String getName() {

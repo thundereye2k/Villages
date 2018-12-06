@@ -2,10 +2,10 @@ package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
+import com.stefthedev.villages.managers.VillageManager;
 import com.stefthedev.villages.utilities.Chat;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -18,7 +18,7 @@ public class VillageInviteCommand extends SubCommand {
     private Main plugin;
 
     public VillageInviteCommand(Main plugin) {
-        super("invite", "invite [player]", "Invite a player to your village.", 2);
+        super("invite", "invite [player]", 2);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }
@@ -53,7 +53,7 @@ public class VillageInviteCommand extends SubCommand {
                     );
                     target.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_INVITE_OTHER.toString()
                             .replace("{0}", player.getName())
-                            .replace("{1}", village.getName())
+                            .replace("{1}", village.toString())
                     );
 
                     TextComponent accept = new TextComponent(Chat.color(Message.ACCEPT.toString()) + " ");

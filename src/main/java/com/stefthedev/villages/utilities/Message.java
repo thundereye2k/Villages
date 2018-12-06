@@ -29,6 +29,7 @@ public enum Message {
     VILLAGE_INVITE_OWNER("village-invite-owner", "You cannot invite yourself to the village"),
     VILLAGE_INVITE_SELF("village-invite-self", "You have invited &b{0} &7to join your village."),
     VILLAGE_INVITE_TRUE("village-invite-true", "&b{0}&7 has already been invited to join a village"),
+    VILLAGE_LEAVE_OWNER("village-leave-owner", "You must disband your village if you want to leave as you are owner."),
     VILLAGE_LOCATION("village-location", "You have been teleported to your village home."),
     VILLAGE_LOCATION_FALSE("village-location-true", "Your village does not have a home."),
     VILLAGE_LOCATION_OWNER("village-location-owner", "You must be owner of the village to set a home."),

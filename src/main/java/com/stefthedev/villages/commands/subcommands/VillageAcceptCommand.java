@@ -4,7 +4,7 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
+import com.stefthedev.villages.managers.VillageManager;
 import org.bukkit.entity.Player;
 
 public class VillageAcceptCommand extends SubCommand {
@@ -13,7 +13,7 @@ public class VillageAcceptCommand extends SubCommand {
     private Main plugin;
 
     public VillageAcceptCommand(Main plugin) {
-        super("accept", "accept", "Accept a pending request.", 1);
+        super("accept", "accept", 1);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }
@@ -33,7 +33,7 @@ public class VillageAcceptCommand extends SubCommand {
             villageManager.getInvite().remove(player.getUniqueId());
             village.getMembers().add(player.getUniqueId());
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_PLAYER_JOIN.toString()
-                    .replace("{0}", village.getName())
+                    .replace("{0}", village.toString())
             );
             return;
         }
@@ -41,7 +41,7 @@ public class VillageAcceptCommand extends SubCommand {
         village = villageManager.getDisband().get(player.getUniqueId());
         if(village != null) {
             plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_DISBAND_BROADCAST.toString()
-                    .replace("{0}", village.getName())
+                    .replace("{0}", village.toString())
             );
             villageManager.remove(village);
             villageManager.getDisband().remove(player.getUniqueId());

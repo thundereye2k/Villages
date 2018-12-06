@@ -19,6 +19,7 @@ public class VillageCommand extends Command {
                 new VillageDisbandCommand(plugin),
                 new VillageHomeCommand(plugin),
                 new VillageInviteCommand(plugin),
+                new VillageLeaveCommand(plugin),
                 new VillageReloadCommand(plugin),
                 new VillageSetHomeCommand(plugin),
                 new VillageUnClaimCommand(plugin)

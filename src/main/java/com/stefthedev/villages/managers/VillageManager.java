@@ -1,7 +1,12 @@
-package com.stefthedev.villages.villages;
+package com.stefthedev.villages.managers;
 
 import com.stefthedev.villages.Main;
+import com.stefthedev.villages.utilities.Config;
+import com.stefthedev.villages.utilities.Manager;
 import com.stefthedev.villages.utilities.Message;
+import com.stefthedev.villages.villages.Village;
+import com.stefthedev.villages.villages.VillageClaim;
+import com.stefthedev.villages.villages.VillageFlag;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -9,36 +14,40 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.util.*;
+import java.util.List;
 
-public class VillageManager {
+public class VillageManager extends Manager<Village> {
 
     private Main plugin;
-    private FileConfiguration config;
+    private Config config;
 
-    private final Set<Village> villageSet;
     private final Map<UUID, Village> invite, disband;
 
-    private List<String> help;
     private World world;
     private int size;
 
-    public VillageManager(Main plugin) {
+    public VillageManager(Main plugin, Config config) {
+        super("Village");
         this.plugin = plugin;
-        this.config = plugin.getVillages().getFileConfiguration();
+        this.config = config;
 
-        this.villageSet = new HashSet<>();
         this.invite = new HashMap<>();
         this.disband = new HashMap<>();
     }
 
-    public void setup() {
-        this.help = plugin.getConfig().getStringList("Help");
+    @Override
+    public void register() {
         this.world = plugin.getServer().getWorld(plugin.getConfig().getString("World"));
         this.size = plugin.getConfig().getInt("Claims");
-    }
 
-    public void deserialize() {
-        ConfigurationSection configSection = config.getConfigurationSection("");
+        if(!plugin.getServer().getWorlds().contains(world)) {
+            plugin.getLogger().warning(ChatColor.YELLOW + "The world does not exist that is configured in your config.yml");
+            plugin.getServer().getPluginManager().disablePlugin(plugin);
+            return;
+        }
+
+        FileConfiguration configuration = config.getFileConfiguration();
+        ConfigurationSection configSection = configuration.getConfigurationSection("");
         if (configSection != null) {
             if (configSection.getKeys(false).isEmpty()) {
                 plugin.getLogger().warning(ChatColor.YELLOW + "No villages were loaded as none were found.");
@@ -47,12 +56,11 @@ public class VillageManager {
             try {
                 configSection.getKeys(false).forEach(s -> {
                     Village village = new Village(s,
-                            UUID.fromString(config.getString(s + ".owner")),
-                            config.getInt(s + ".level"),
-                            (Location) config.get(s + ".location"));
-                    setup(village, config.getStringList(s + ".claims"), config.getStringList(s + ".members"));
-
-                    villageSet.add(village);
+                            UUID.fromString(configuration.getString(s + ".owner")),
+                            configuration.getInt(s + ".level"),
+                            (Location) configuration.get(s + ".location"));
+                    setup(village, configuration.getStringList(s + ".claims"), configuration.getStringList(s + ".members"));
+                    add(village);
                 });
                 plugin.getLogger().info(ChatColor.GREEN + "Villages loaded correctly.");
             } catch (Exception e) {
@@ -63,52 +71,41 @@ public class VillageManager {
         }
     }
 
-    public void serialize() {
-        ConfigurationSection configSection = config.getConfigurationSection("");
-        configSection.getKeys(false).forEach(s -> config.set(s, null));
-        plugin.getVillages().save();
-        villageSet.forEach(village -> {
-            config.set(village.getName() + ".level", village.getLevel());
-            config.set(village.getName() + ".owner", village.getOwner().toString());
-            config.set(village.getName() + ".members", getMembers(village));
-            config.set(village.getName() + ".claims", getChunks(village));
-            config.set(village.getName() + ".location", village.getLocation());
+    @Override
+    public void unregister() {
+        FileConfiguration configuration = config.getFileConfiguration();
+        ConfigurationSection configSection = configuration.getConfigurationSection("");
+        configSection.getKeys(false).forEach(s -> configuration.set(s, null));
+        getSet().forEach(village -> {
+            configuration.set(village.toString() + ".level", village.getLevel());
+            configuration.set(village.toString() + ".owner", village.getOwner().toString());
+            configuration.set(village.toString() + ".members", village.getMembers().toArray());
+            configuration.set(village.toString() + ".claims", getClaims(village));
+            configuration.set(village.toString() + ".location", village.getLocation());
         });
-        villageSet.clear();
-        plugin.getVillages().save();
-    }
-
-    public void add(Village village) {
-        villageSet.add(village);
-    }
-
-    public void remove(Village village) {
-        villageSet.remove(village);
+        config.save();
+        clear();
     }
 
     public Village isClaimed(Chunk chunk) {
-        for (Village village : villageSet) {
-            if (village.getChunks().contains(chunk)) {
+        for (Village village : getSet()) {
+            if (village.isClaimed(chunk.getX(), chunk.getZ())) {
                 return village;
             }
         }
         return null;
     }
 
-    private List<UUID> getMembers(Village village) {
-        return new ArrayList<>(village.getMembers());
-    }
-
-    private List<String> getChunks(Village village) {
-        List<String> chunks = new ArrayList<>();
-        for (Chunk chunk : village.getChunks()) {
-            chunks.add(chunk.getX() + ":" + chunk.getZ());
+    private List<String> getClaims(Village village) {
+        List<String> claims = new ArrayList<>();
+        for (VillageClaim villageClaim : village.getChunks()) {
+            claims.add(villageClaim.toString());
         }
-        return chunks;
+        return claims;
     }
 
     public Village getVillage(Player player) {
-        for (Village village : villageSet) {
+        for (Village village : getSet()) {
             if (village.getMembers().contains(player.getUniqueId())) {
                 return village;
             }
@@ -123,14 +120,14 @@ public class VillageManager {
         try {
             chunks.forEach(s -> {
                 String[] chunk = s.split(":");
-                village.getChunks().add(Bukkit.getWorld("world").getChunkAt(
+                village.addClaim(new VillageClaim(
                         Integer.parseInt(chunk[0]),
                         Integer.parseInt(chunk[1])
                 ));
             });
             members.forEach(s -> village.getMembers().add(UUID.fromString(s)));
         } catch (Exception e) {
-            plugin.getLogger().severe(ChatColor.RED + "An error occurred while loading: " + village.getName());
+            plugin.getLogger().severe(ChatColor.RED + "An error occurred while loading: " + village.toString());
             e.printStackTrace();
         }
     }
@@ -152,7 +149,7 @@ public class VillageManager {
 
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()
                     .replace("{0}", villageFlag.toString())
-                    .replace("{1}", village.getName())
+                    .replace("{1}", village.toString())
             );
             return true;
         }
@@ -164,10 +161,6 @@ public class VillageManager {
 
     public Map<UUID, Village> getDisband() {
         return disband;
-    }
-
-    public List<String> getHelp() {
-        return help;
     }
 
     public World getWorld() {

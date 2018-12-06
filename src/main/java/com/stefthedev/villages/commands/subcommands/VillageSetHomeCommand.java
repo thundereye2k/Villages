@@ -4,7 +4,7 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
+import com.stefthedev.villages.managers.VillageManager;
 import org.bukkit.entity.Player;
 
 public class VillageSetHomeCommand extends SubCommand {
@@ -12,7 +12,7 @@ public class VillageSetHomeCommand extends SubCommand {
     private VillageManager villageManager;
 
     public VillageSetHomeCommand(Main plugin) {
-        super("sethome", "sethome", "Set a home at your village.", 1);
+        super("sethome", "sethome", 1);
         this.villageManager = plugin.getVillageManager();
     }
 

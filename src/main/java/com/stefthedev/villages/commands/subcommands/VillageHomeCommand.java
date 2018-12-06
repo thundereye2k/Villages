@@ -4,15 +4,17 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
+import com.stefthedev.villages.managers.VillageManager;
 import org.bukkit.entity.Player;
 
 public class VillageHomeCommand extends SubCommand {
 
     private VillageManager villageManager;
+    private Main plugin;
 
     public VillageHomeCommand(Main plugin) {
-        super("home", "home", "Teleport to your village home", 1);
+        super("home", "home", 1);
+        this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }
 

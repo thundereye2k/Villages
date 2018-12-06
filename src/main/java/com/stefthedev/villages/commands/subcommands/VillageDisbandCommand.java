@@ -5,7 +5,7 @@ import com.stefthedev.villages.commands.SubCommand;
 import com.stefthedev.villages.utilities.Chat;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
+import com.stefthedev.villages.managers.VillageManager;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.HoverEvent;
@@ -17,7 +17,7 @@ public class VillageDisbandCommand extends SubCommand {
     private VillageManager villageManager;
 
     public VillageDisbandCommand(Main plugin) {
-        super("disband", "disband", "Disband your current village.", 1);
+        super("disband", "disband", 1);
         this.villageManager = plugin.getVillageManager();
     }
 

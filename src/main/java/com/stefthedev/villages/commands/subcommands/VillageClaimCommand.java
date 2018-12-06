@@ -2,9 +2,9 @@ package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
+import com.stefthedev.villages.managers.VillageManager;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
 import org.bukkit.entity.Player;
 
 public class VillageClaimCommand extends SubCommand {
@@ -12,7 +12,7 @@ public class VillageClaimCommand extends SubCommand {
     private VillageManager villageManager;
 
     public VillageClaimCommand(Main plugin) {
-        super("claim", "claim", "Claim land for your village.", 1);
+        super("claim", "claim",1);
         this.villageManager = plugin.getVillageManager();
     }
 
@@ -39,13 +39,13 @@ public class VillageClaimCommand extends SubCommand {
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_SELF.toString());
             } else if(village == null) {
                 village = villageManager.getVillage(player);
-                village.getChunks().add(player.getLocation().getChunk());
+                village.addChunk(player.getLocation().getChunk());
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_SUCCESS.toString()
                         .replace("{0}", player.getLocation().getChunk().getX() + "," + player.getLocation().getChunk().getZ())
                 );
             } else {
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_OTHER.toString()
-                        .replace("{0}", village.getName())
+                        .replace("{0}", village.toString())
                 );
             }
         } else {

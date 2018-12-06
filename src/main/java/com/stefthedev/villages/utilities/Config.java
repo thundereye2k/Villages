@@ -52,6 +52,11 @@ public class Config {
         }
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public FileConfiguration getFileConfiguration() {
         return fileConfiguration;
     }

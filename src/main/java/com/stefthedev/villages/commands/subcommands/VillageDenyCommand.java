@@ -4,7 +4,7 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.SubCommand;
 import com.stefthedev.villages.utilities.Message;
 import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageManager;
+import com.stefthedev.villages.managers.VillageManager;
 import org.bukkit.entity.Player;
 
 public class VillageDenyCommand extends SubCommand {
@@ -13,7 +13,7 @@ public class VillageDenyCommand extends SubCommand {
     private Main plugin;
 
     public VillageDenyCommand(Main plugin) {
-        super("deny", "deny", "Deny a pending request.", 1);
+        super("deny", "deny", 1);
         this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }
@@ -30,7 +30,7 @@ public class VillageDenyCommand extends SubCommand {
             }
             villageManager.getInvite().remove(player.getUniqueId());
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_DENY_PLAYER.toString()
-                    .replace("{0}", village.getName())
+                    .replace("{0}", village.toString())
             );
             return;
         }
@@ -38,7 +38,7 @@ public class VillageDenyCommand extends SubCommand {
         village = villageManager.getDisband().get(player.getUniqueId());
         if(village != null) {
             plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_DISBAND_DENY.toString()
-                    .replace("{0}", village.getName())
+                    .replace("{0}", village.toString())
             );
             villageManager.getDisband().remove(player.getUniqueId());
             return;
