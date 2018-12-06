@@ -23,6 +23,12 @@ public class VillageCreateCommand extends SubCommand {
     public void onCommand(Player player, String[] args) {
         Village village = villageManager.getVillage(player);
         if(village == null) {
+            if(villageManager.exists(args[1])) {
+                player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CREATE_EXISTS.toString()
+                        .replace("{0}", args[1])
+                );
+                return;
+            }
             village = new Village(args[1], player.getUniqueId(), 0, player.getLocation());
             village.addChunk(player.getLocation().getChunk());
             villageManager.add(village);

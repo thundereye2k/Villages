@@ -1,11 +1,8 @@
 package com.stefthedev.villages.commands.subcommands;
 
-import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.world.World;
 import com.sk89q.worldguard.WorldGuard;
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.internal.platform.WorldGuardPlatform;
-import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.stefthedev.villages.Main;
@@ -35,6 +32,7 @@ public class VillageClaimCommand extends SubCommand {
             World world = worldGuard.getWorldByName(player.getWorld().getName());
             RegionManager regionManager = regionContainer.get(world);
             if(regionManager != null) {
+                System.out.println("Works");
                 regionManager.getRegions().forEach((s, protectedRegion) -> {
                     if (protectedRegion.getMembers().getPlayers().contains(player.getName())) {
                         player.sendMessage("Works.");
@@ -64,6 +62,10 @@ public class VillageClaimCommand extends SubCommand {
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_SELF.toString());
             } else if(village == null) {
                 village = villageManager.getVillage(player);
+                if(!villageManager.allowClaim(player)) {
+                    player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_CLOSE.toString());
+                    return;
+                }
                 village.addChunk(player.getLocation().getChunk());
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_SUCCESS.toString()
                         .replace("{0}", player.getLocation().getChunk().getX() + "," + player.getLocation().getChunk().getZ())

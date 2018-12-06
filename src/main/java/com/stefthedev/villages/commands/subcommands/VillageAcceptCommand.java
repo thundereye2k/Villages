@@ -30,8 +30,8 @@ public class VillageAcceptCommand extends SubCommand {
                     );
                 }
             });
-            villageManager.getInvite().remove(player.getUniqueId());
             village.getMembers().add(player.getUniqueId());
+            villageManager.getInvite().remove(player.getUniqueId());
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_PLAYER_JOIN.toString()
                     .replace("{0}", village.toString())
             );

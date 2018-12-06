@@ -9,11 +9,11 @@ public class VillageClaim {
         this.z = z;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 
-    int getZ() {
+    public int getZ() {
         return z;
     }
 

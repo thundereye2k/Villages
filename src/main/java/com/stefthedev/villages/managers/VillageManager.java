@@ -87,6 +87,15 @@ public class VillageManager extends Manager<Village> {
         clear();
     }
 
+    public boolean exists(String name) {
+        for(Village village : getSet()) {
+            if(village.toString().equalsIgnoreCase(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Village isClaimed(Chunk chunk) {
         for (Village village : getSet()) {
             if (village.isClaimed(chunk.getX(), chunk.getZ())) {
@@ -102,6 +111,35 @@ public class VillageManager extends Manager<Village> {
             claims.add(villageClaim.toString());
         }
         return claims;
+    }
+
+    public boolean allowClaim(Player player) {
+        Village village = getVillage(player);
+        for(Chunk chunk : getSurroundingChunks(player)) {
+            for(VillageClaim villageClaim : village.getChunks()) {
+                if(villageClaim.getX() == chunk.getX() && villageClaim.getZ() == chunk.getZ()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private Set<Chunk> getSurroundingChunks(Player player) {
+        int[] offset = {-1,0,1};
+        World world = player.getWorld();
+        int baseX = player.getLocation().getChunk().getX();
+        int baseZ = player.getLocation().getChunk().getZ();
+
+        Set<Chunk> chunks = new HashSet<>();
+
+        for(int x : offset) {
+            for(int z : offset) {
+                Chunk chunk = world.getChunkAt(baseX + x, baseZ + z);
+                chunks.add(chunk);
+            }
+        }
+        return chunks;
     }
 
     public Village getVillage(Player player) {

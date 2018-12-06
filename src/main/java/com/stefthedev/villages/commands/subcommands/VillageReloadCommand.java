@@ -21,10 +21,10 @@ public class VillageReloadCommand extends SubCommand {
     @Override
     public void onCommand(Player player, String[] args) {
         try {
-            villageManager.register();
+            villageManager.unregister();
             plugin.reloadConfig();
             plugin.getConfigManager().getSet().forEach(Config::reload);
-            villageManager.unregister();
+            villageManager.register();
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_RELOAD.toString());
         } catch (Exception e) {
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_RELOAD_ERROR.toString());
