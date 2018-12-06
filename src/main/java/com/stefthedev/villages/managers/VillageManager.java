@@ -84,6 +84,9 @@ public class VillageManager extends Manager<Village> {
             configuration.set(village.toString() + ".location", village.getLocation());
         });
         config.save();
+
+        disband.clear();
+        invite.clear();
         clear();
     }
 
@@ -175,14 +178,8 @@ public class VillageManager extends Manager<Village> {
         if (village == null) {
             return false;
         } else {
-            if (player == null) {
-                return false;
-            }
-
-            if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) {
-                return false;
-            }
-
+            if (player == null) return false;
+            if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) return false;
             if(villageFlag == VillageFlag.INTERACT) return false;
 
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()

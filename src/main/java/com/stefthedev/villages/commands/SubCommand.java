@@ -27,4 +27,8 @@ public abstract class SubCommand {
         return length;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
 }

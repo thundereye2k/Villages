@@ -4,9 +4,15 @@ import com.stefthedev.villages.Main;
 import com.stefthedev.villages.commands.Command;
 import com.stefthedev.villages.commands.subcommands.*;
 import com.stefthedev.villages.utilities.Chat;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class VillageCommand extends Command {
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class VillageCommand extends Command implements TabCompleter {
 
     private Main plugin;
 
@@ -41,5 +47,15 @@ public class VillageCommand extends Command {
         }
 
         plugin.getConfig().getStringList("Help." + index).forEach(s -> player.sendMessage(Chat.color(s)));
+    }
+
+    @Override
+    public List<String> onTabComplete(CommandSender commandSender, org.bukkit.command.Command command, String s, String[] strings) {
+        if(strings.length == 1) {
+            List<String> commands = new ArrayList<>();
+            Arrays.asList(getSubCommands()).forEach(subCommand -> commands.add(subCommand.toString()));
+            return commands;
+        }
+        return null;
     }
 }

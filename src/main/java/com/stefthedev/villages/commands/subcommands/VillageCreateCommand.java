@@ -29,13 +29,20 @@ public class VillageCreateCommand extends SubCommand {
                 );
                 return;
             }
-            village = new Village(args[1], player.getUniqueId(), 0, player.getLocation());
-            village.addChunk(player.getLocation().getChunk());
-            villageManager.add(village);
-            plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_CREATE_ALL.toString()
-                    .replace("{0}", player.getName())
-                    .replace("{1}", village.toString())
-            );
+            village = villageManager.isClaimed(player.getLocation().getChunk());
+            if(village == null) {
+                village = new Village(args[1], player.getUniqueId(), 0, player.getLocation());
+                village.addChunk(player.getLocation().getChunk());
+                villageManager.add(village);
+                plugin.getServer().broadcastMessage(Message.PREFIX.toString() + Message.VILLAGE_CREATE_ALL.toString()
+                        .replace("{0}", player.getName())
+                        .replace("{1}", village.toString())
+                );
+            } else {
+                player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_OTHER.toString()
+                    .replace("{0}", village.toString())
+                );
+            }
         } else {
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_PLAYER_TRUE.toString());
         }

@@ -47,6 +47,14 @@ public class VillageInviteCommand extends SubCommand {
                     return;
                 }
 
+                Village targetVillage = villageManager.getVillage(target);
+                if(targetVillage != null && targetVillage.getOwner() == target.getUniqueId()) {
+                    player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_TARGET_TRUE.toString()
+                            .replace("{0}", target.getName())
+                    );
+                    return;
+                }
+
                 if(!villageManager.getInvite().containsKey(target.getUniqueId())) {
                     player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_INVITE_SELF.toString()
                             .replace("{0}", target.getName())
