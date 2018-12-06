@@ -47,7 +47,7 @@ public abstract class Command implements CommandExecutor {
         return true;
     }
 
-    public SubCommand[] getSubCommands() {
+    protected SubCommand[] getSubCommands() {
         return subCommands;
     }
 

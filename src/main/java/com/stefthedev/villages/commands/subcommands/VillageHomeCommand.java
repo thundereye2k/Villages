@@ -10,11 +10,9 @@ import org.bukkit.entity.Player;
 public class VillageHomeCommand extends SubCommand {
 
     private VillageManager villageManager;
-    private Main plugin;
 
     public VillageHomeCommand(Main plugin) {
         super("home", "home", 1);
-        this.plugin = plugin;
         this.villageManager = plugin.getVillageManager();
     }
 

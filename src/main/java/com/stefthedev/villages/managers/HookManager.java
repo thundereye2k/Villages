@@ -3,7 +3,6 @@ package com.stefthedev.villages.managers;
 import com.stefthedev.villages.Main;
 import com.stefthedev.villages.utilities.Hook;
 import com.stefthedev.villages.utilities.Manager;
-import org.bukkit.plugin.Plugin;
 
 import java.util.Arrays;
 

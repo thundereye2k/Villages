@@ -1,4 +1,5 @@
 package com.stefthedev.villages.utilities;
+
 public class Hook {
 
     private final String name;
