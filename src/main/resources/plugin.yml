@@ -1,6 +1,6 @@
 name: Villages
 main: com.stefthedev.villages.Main
-version: ALPHA 0.6
+version: ALPHA 0.8.2
 author: StefTheDev
 softdepend: [WorldGuard]
 

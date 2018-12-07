@@ -6,8 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-
 public abstract class Command implements CommandExecutor {
 
     private String name, permission;
@@ -28,21 +26,22 @@ public abstract class Command implements CommandExecutor {
                 onCommand((Player) commandSender, strings);
                 return true;
             }
-            Arrays.asList(subCommands).forEach(subCommand -> {
+            for(SubCommand subCommand : subCommands) {
                 if (!commandSender.hasPermission((permission + "." + subCommand.toString()).toLowerCase())) {
                     commandSender.sendMessage(Message.PREFIX.toString() + Message.PERMISSION.toString());
-                    return;
+                    break;
                 }
                 if (subCommand.getName().equalsIgnoreCase(strings[0])) {
                     if (strings.length < subCommand.getLength()) {
                         commandSender.sendMessage(Message.PREFIX.toString() + Message.USAGE.toString()
                                 .replace("{0}", "/" + name + subCommand.getUsage())
                         );
-                        return;
+                        break;
                     }
                     subCommand.onCommand((Player) commandSender, strings);
+                    break;
                 }
-            });
+            }
         }
         return true;
     }
