@@ -2,6 +2,7 @@ package com.stefthedev.villages.utilities.villages;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -34,6 +35,19 @@ public class Village {
 
     public void addClaim(VillageClaim villageClaim) {
         claims.add(villageClaim);
+    }
+
+    public void removeChunk(Chunk chunk) {
+        claims.remove(getVillageClaim(chunk.getX(), chunk.getZ()));
+    }
+
+    public VillageClaim getVillageClaim(int x, int z) {
+        for(VillageClaim villageClaim : claims) {
+            if(villageClaim.getX() == x && villageClaim.getZ() == z) {
+                return villageClaim;
+            }
+        }
+        return null;
     }
 
     public boolean isClaimed(int x, int z) {

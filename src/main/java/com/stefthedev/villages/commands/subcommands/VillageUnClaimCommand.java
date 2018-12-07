@@ -27,10 +27,13 @@ public class VillageUnClaimCommand extends SubCommand {
                 return;
             }
             Chunk chunk = player.getLocation().getChunk();
-            village = villageManager.isClaimed(player.getLocation().getChunk());
+            village = villageManager.isClaimed(chunk);
             if(village == villageManager.getVillage(player)) {
-                village.getChunks().remove(new VillageClaim(chunk.getX(), chunk.getZ()));
-                player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_UNCLAIM.toString());
+                VillageClaim villageClaim = village.getVillageClaim(chunk.getX(), chunk.getZ());
+                if(villageClaim != null) {
+                    player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_UNCLAIM.toString());
+                    village.removeChunk(chunk);
+                }
             } else if(village != null) {
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_UNCLAIM_OTHER.toString()
                         .replace("{0}", village.toString())
