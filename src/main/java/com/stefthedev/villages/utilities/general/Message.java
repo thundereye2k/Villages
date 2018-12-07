@@ -58,6 +58,7 @@ public enum Message {
     VILLAGE_TITLE_FOOTER_WILDERNESS("village-title-footer-wilderness", "&7Fresh new land awaits you."),
     VILLAGE_UNCLAIM("village-unclaim", "You have unclaimed an area for your village."),
     VILLAGE_UNCLAIM_FALSE("village-unclaim-false", "This land has not yet been claimed."),
+    VILLAGE_UNCLAIM_ONE("village-unclaim-one", "You are not able to unclaim this land as this is the only land that you have."),
     VILLAGE_UNCLAIM_OTHER("village-unclaim-other", "You can't unclaim this land because it belongs to &b{0}&7."),
     VILLAGE_UNCLAIM_OWNER("village-unclaim-owner", "You must be owner to unclaim your village land.");
 

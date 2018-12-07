@@ -26,6 +26,10 @@ public class VillageUnClaimCommand extends SubCommand {
                 player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_UNCLAIM_OWNER.toString());
                 return;
             }
+            if(village.getChunks().size() <= 1) {
+                player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_UNCLAIM_ONE.toString());
+                return;
+            }
             Chunk chunk = player.getLocation().getChunk();
             village = villageManager.isClaimed(chunk);
             if(village == villageManager.getVillage(player)) {
