@@ -1,8 +1,8 @@
 package com.stefthedev.villages.managers;
 
-import com.stefthedev.villages.utilities.Config;
-import com.stefthedev.villages.utilities.Manager;
-import com.stefthedev.villages.utilities.Message;
+import com.stefthedev.villages.utilities.general.Config;
+import com.stefthedev.villages.utilities.general.Manager;
+import com.stefthedev.villages.utilities.general.Message;
 
 import java.util.Arrays;
 

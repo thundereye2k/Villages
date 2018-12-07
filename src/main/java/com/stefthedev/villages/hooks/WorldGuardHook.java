@@ -8,7 +8,7 @@ import com.sk89q.worldguard.protection.ApplicableRegionSet;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
-import com.stefthedev.villages.utilities.Hook;
+import com.stefthedev.villages.utilities.general.Hook;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -25,14 +25,14 @@ public class WorldGuardHook extends Hook {
         RegionManager regionManager = regionContainer.get(world);
         Location location = player.getLocation();
 
-        if(regionManager == null) return false;
+        if (regionManager == null) return false;
 
         ApplicableRegionSet protectedRegions = regionManager.getApplicableRegions(
                 BlockVector3.at(location.getX(), location.getY(), location.getZ())
         );
 
-        for(ProtectedRegion protectedRegion : protectedRegions) {
-            if(!protectedRegion.getOwners().contains(player.getUniqueId())) {
+        for (ProtectedRegion protectedRegion : protectedRegions) {
+            if (!protectedRegion.getOwners().contains(player.getUniqueId())) {
                 return true;
             }
         }

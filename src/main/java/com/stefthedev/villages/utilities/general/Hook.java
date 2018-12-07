@@ -1,4 +1,4 @@
-package com.stefthedev.villages.utilities;
+package com.stefthedev.villages.utilities.general;
 
 public class Hook {
 

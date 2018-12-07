@@ -1,12 +1,12 @@
 package com.stefthedev.villages.managers;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.utilities.Config;
-import com.stefthedev.villages.utilities.Manager;
-import com.stefthedev.villages.utilities.Message;
-import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageClaim;
-import com.stefthedev.villages.villages.VillageFlag;
+import com.stefthedev.villages.utilities.general.Config;
+import com.stefthedev.villages.utilities.general.Manager;
+import com.stefthedev.villages.utilities.general.Message;
+import com.stefthedev.villages.utilities.villages.Village;
+import com.stefthedev.villages.utilities.villages.VillageClaim;
+import com.stefthedev.villages.utilities.villages.VillageFlag;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
@@ -188,7 +188,7 @@ public class VillageManager extends Manager<Village> {
         } else {
             if (player == null) return false;
             if (village.getMembers().contains(player.getUniqueId()) || village.getOwner().equals(player.getUniqueId())) return false;
-            if(villageFlag == VillageFlag.INTERACT) return false;
+            if(villageFlag == VillageFlag.INTERACT_ALL) return false;
 
             player.sendMessage(Message.PREFIX.toString() + Message.VILLAGE_CLAIM_DENY.toString()
                     .replace("{0}", villageFlag.toString())

@@ -1,8 +1,8 @@
 package com.stefthedev.villages.managers;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.utilities.Hook;
-import com.stefthedev.villages.utilities.Manager;
+import com.stefthedev.villages.utilities.general.Hook;
+import com.stefthedev.villages.utilities.general.Manager;
 
 import java.util.Arrays;
 

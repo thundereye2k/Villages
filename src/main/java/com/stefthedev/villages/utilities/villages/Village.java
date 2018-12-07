@@ -1,4 +1,4 @@
-package com.stefthedev.villages.villages;
+package com.stefthedev.villages.utilities.villages;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;

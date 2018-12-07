@@ -1,4 +1,4 @@
-package com.stefthedev.villages.utilities;
+package com.stefthedev.villages.utilities.general;
 
 import org.bukkit.configuration.file.FileConfiguration;
 
@@ -42,6 +42,7 @@ public enum Message {
     VILLAGE_LOCATION_OTHER("village-location-other", "You are not able to set your home on other village land."),
     VILLAGE_LOCATION_SET("village-location-set", "You have set a new home at your location."),
     VILLAGE_LOCATION_WILDERNESS("village-location-wilderness", "You are not able to set home in the wilderness."),
+    VILLAGE_NULL("village-null", "No villages have been created."),
     VILLAGE_RELOAD("village-reload", "You have successfully reloaded the configuration."),
     VILLAGE_RELOAD_ERROR("village-reload-error", "An error occurred while reloading the configuration."),
     VILLAGE_PLAYER_JOIN("village-player-join", "You have successfully joined &b{0}&7."),

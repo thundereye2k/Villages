@@ -1,4 +1,4 @@
-package com.stefthedev.villages.commands;
+package com.stefthedev.villages.utilities.commands;
 
 import org.bukkit.entity.Player;
 

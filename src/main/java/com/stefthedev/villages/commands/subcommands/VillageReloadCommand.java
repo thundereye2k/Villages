@@ -1,10 +1,10 @@
 package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.commands.SubCommand;
+import com.stefthedev.villages.utilities.commands.SubCommand;
 import com.stefthedev.villages.managers.VillageManager;
-import com.stefthedev.villages.utilities.Config;
-import com.stefthedev.villages.utilities.Message;
+import com.stefthedev.villages.utilities.general.Config;
+import com.stefthedev.villages.utilities.general.Message;
 import org.bukkit.entity.Player;
 
 public class VillageReloadCommand extends SubCommand {

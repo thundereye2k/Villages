@@ -1,6 +1,6 @@
-package com.stefthedev.villages.commands;
+package com.stefthedev.villages.utilities.commands;
 
-import com.stefthedev.villages.utilities.Message;
+import com.stefthedev.villages.utilities.general.Message;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +29,7 @@ public abstract class Command implements CommandExecutor {
                 return true;
             }
             Arrays.asList(subCommands).forEach(subCommand -> {
-                if (!commandSender.hasPermission((permission + "." + subCommand.getName()).toLowerCase())) {
+                if (!commandSender.hasPermission((permission + "." + subCommand.toString()).toLowerCase())) {
                     commandSender.sendMessage(Message.PREFIX.toString() + Message.PERMISSION.toString());
                     return;
                 }

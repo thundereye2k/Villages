@@ -1,9 +1,9 @@
 package com.stefthedev.villages.listeners;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.utilities.Message;
-import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageFlag;
+import com.stefthedev.villages.utilities.general.Message;
+import com.stefthedev.villages.utilities.villages.Village;
+import com.stefthedev.villages.utilities.villages.VillageFlag;
 import com.stefthedev.villages.managers.VillageManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,7 +34,7 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        if(villageManager.check(event.getPlayer().getLocation().getBlock(), event.getPlayer(), VillageFlag.INTERACT)) {
+        if(villageManager.check(event.getPlayer().getLocation().getBlock(), event.getPlayer(), VillageFlag.INTERACT_ALL)) {
             if(event.getAction() == Action.PHYSICAL) {
                 event.setCancelled(true);
             }

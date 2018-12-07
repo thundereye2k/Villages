@@ -1,4 +1,4 @@
-package com.stefthedev.villages.utilities;
+package com.stefthedev.villages.utilities.general;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

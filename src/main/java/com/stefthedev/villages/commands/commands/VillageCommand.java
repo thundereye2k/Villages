@@ -1,9 +1,9 @@
 package com.stefthedev.villages.commands.commands;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.commands.Command;
+import com.stefthedev.villages.utilities.commands.Command;
 import com.stefthedev.villages.commands.subcommands.*;
-import com.stefthedev.villages.utilities.Chat;
+import com.stefthedev.villages.utilities.general.Chat;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
@@ -26,6 +26,7 @@ public class VillageCommand extends Command implements TabCompleter {
                 new VillageHomeCommand(plugin),
                 new VillageInviteCommand(plugin),
                 new VillageLeaveCommand(plugin),
+                new VillageListCommand(plugin),
                 new VillageReloadCommand(plugin),
                 new VillageSetHomeCommand(plugin),
                 new VillageUnClaimCommand(plugin)

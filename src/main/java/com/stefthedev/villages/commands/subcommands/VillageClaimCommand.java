@@ -1,12 +1,12 @@
 package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.commands.SubCommand;
+import com.stefthedev.villages.utilities.commands.SubCommand;
 import com.stefthedev.villages.hooks.WorldGuardHook;
 import com.stefthedev.villages.managers.HookManager;
 import com.stefthedev.villages.managers.VillageManager;
-import com.stefthedev.villages.utilities.Message;
-import com.stefthedev.villages.villages.Village;
+import com.stefthedev.villages.utilities.general.Message;
+import com.stefthedev.villages.utilities.villages.Village;
 import org.bukkit.entity.Player;
 
 

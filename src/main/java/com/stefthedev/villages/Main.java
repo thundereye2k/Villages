@@ -1,6 +1,6 @@
 package com.stefthedev.villages;
 
-import com.stefthedev.villages.commands.Command;
+import com.stefthedev.villages.utilities.commands.Command;
 import com.stefthedev.villages.commands.commands.VillageCommand;
 import com.stefthedev.villages.hooks.WorldGuardHook;
 import com.stefthedev.villages.managers.ConfigManager;
@@ -8,8 +8,8 @@ import com.stefthedev.villages.managers.HookManager;
 import com.stefthedev.villages.managers.VillageManager;
 import com.stefthedev.villages.listeners.BlockListener;
 import com.stefthedev.villages.listeners.PlayerListener;
-import com.stefthedev.villages.utilities.Config;
-import com.stefthedev.villages.utilities.Manager;
+import com.stefthedev.villages.utilities.general.Config;
+import com.stefthedev.villages.utilities.general.Manager;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -59,7 +59,7 @@ public class Main extends JavaPlugin {
         Arrays.asList(commands).forEach(command -> getCommand(command.getName()).setExecutor(command));
     }
 
-    private void registerListeners(Listener... listeners) {
+    public void registerListeners(Listener... listeners) {
         Arrays.asList(listeners).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
 

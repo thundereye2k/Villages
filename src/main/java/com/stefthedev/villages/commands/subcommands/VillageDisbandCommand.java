@@ -1,10 +1,10 @@
 package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.commands.SubCommand;
-import com.stefthedev.villages.utilities.Chat;
-import com.stefthedev.villages.utilities.Message;
-import com.stefthedev.villages.villages.Village;
+import com.stefthedev.villages.utilities.commands.SubCommand;
+import com.stefthedev.villages.utilities.general.Chat;
+import com.stefthedev.villages.utilities.general.Message;
+import com.stefthedev.villages.utilities.villages.Village;
 import com.stefthedev.villages.managers.VillageManager;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;

@@ -1,10 +1,10 @@
 package com.stefthedev.villages.commands.subcommands;
 
 import com.stefthedev.villages.Main;
-import com.stefthedev.villages.commands.SubCommand;
-import com.stefthedev.villages.utilities.Message;
-import com.stefthedev.villages.villages.Village;
-import com.stefthedev.villages.villages.VillageClaim;
+import com.stefthedev.villages.utilities.commands.SubCommand;
+import com.stefthedev.villages.utilities.general.Message;
+import com.stefthedev.villages.utilities.villages.Village;
+import com.stefthedev.villages.utilities.villages.VillageClaim;
 import com.stefthedev.villages.managers.VillageManager;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
