@@ -58,6 +58,10 @@ public abstract class Menu implements InventoryHolder, Listener {
         }
     }
 
+    public void clear() {
+        itemList.clear();
+    }
+
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent event) {
         if(getInventory() == null) return;

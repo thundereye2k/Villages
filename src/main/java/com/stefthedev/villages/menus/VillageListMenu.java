@@ -12,6 +12,9 @@ import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class VillageListMenu extends Menu {
 
     private final Player player;
@@ -30,19 +33,13 @@ public class VillageListMenu extends Menu {
 
     @Override
     public Menu build() {
-        if(villageManager.getSet() == null){
-            System.out.println("Null");
-            return null;
-        }
-        int count = 0;
-        for(Village village : villageManager.getSet()) {
-            if(count >= 45) {
-                break;
-            }
+        List<Village> villageList = new ArrayList<>(villageManager.getSet());
+        for (int i = 0; i < villageList.size(); i++) {
+            if(i >= 45 ) break;
+            Village village = villageList.get(i + ((page - 1) * 45));
             if(village != null) {
-                addItems(new MenuItem(count, village(village, count + 1).build(null), null));
+                addItems(new MenuItem(i, village(village, i + 1).build(null), null));
             }
-            count++;
         }
 
         pageSelect();
@@ -57,16 +54,19 @@ public class VillageListMenu extends Menu {
         MenuItem previous = new MenuItem(48,
                 page("Previous").build(null),
                 inventoryClickEvent -> new VillageListMenu(player, plugin, page - 1).build().open(player));
+
+        addItems(new MenuItem(49, close().build(null), inventoryClickEvent -> player.closeInventory()));
+
         if(pages == page && page != 1) {
             addItems(previous);
+            return;
         }
         if(page == 1 && pages > 1) {
             addItems(next);
         }
-        if(pages > 1 && pages != page) {
+        if(page < pages && page > 1) {
             addItems(next, previous);
         }
-        addItems(new MenuItem(49, close().build(null), inventoryClickEvent -> player.closeInventory()));
     }
 
     private Item village(Village village, int index) {
